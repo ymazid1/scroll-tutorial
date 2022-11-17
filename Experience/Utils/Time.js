@@ -1,5 +1,8 @@
-export default class Time {
+import { EventEmitter } from "events";
+
+export default class Time extends EventEmitter {
     constructor() {
+        super();
         this.start = Date.now();
         this.currentTime = this.start;
         this.elapsedTime = 0;
@@ -15,6 +18,7 @@ export default class Time {
 
         this.elapsedTime = this.currentTime - this.start;
 
-        window.requestAnimationFrame(() => this.update(  ))
+        this.emit("update")
+        window.requestAnimationFrame(() => this.update())
     }
 }
